@@ -14,22 +14,22 @@ const App = () => (
             <Menu/>
             <Switch>
                 <Route
-                    path='/'
+                    path='/WL-Deploy/'
                     component={MainScreen}
                     exact/>
                 <Route
-                    path='/cartoons/:id'
+                    path='/WL-Deploy/cartoons/:id'
                     render={({match}) =>{
                         const { id } = match.params;
                         return <FilmDetails itemId={id}/>;
                     }}/>
                 <Route
-                    path='/pages/:current'
+                    path='/WL-Deploy/pages/:current'
                     render={({match}) =>{
                         const { current } = match.params;
                         return <MockPage currentPage={current}/>;
                     }}/>
-                <Route path='/add' component={AddFilmForm}/>
+                <Route path='/WL-Deploy/add' component={AddFilmForm}/>
             </Switch>
         </div>
     </Router>

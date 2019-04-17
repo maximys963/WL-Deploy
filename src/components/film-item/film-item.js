@@ -28,7 +28,7 @@ const FilmItem = (props) =>{
                     src={require('../../assets/icons/clear.svg')}
                 />
             </div>
-            <Link to={`/cartoons/${id}`}>
+            <Link to={`/WL-Deploy/cartoons/${id}`}>
                 <img className='film-image'
                     alt='placeholder-img'
                     src={ deleteStatus === 'waiting'
