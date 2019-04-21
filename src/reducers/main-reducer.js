@@ -19,9 +19,9 @@ export const mainReducer = (state = [], action) =>{
         return [...state.slice(0, index), ...state.slice(index +1)];
     case SEARCH_BY_ACTOR:
         const searchElementsByActor = state.map(film =>
-            film.actors.join(' ').toLowerCase().indexOf(action.string.toLowerCase()) === -1
-                ?{...film, visible: false}
-                :{...film, visible: true}
+            film.actors.some(elem => elem.toLowerCase().indexOf(action.string.toLowerCase()) !== -1)
+                ?{...film, visible: true}
+                :{...film, visible: false}
         );
         return[...searchElementsByActor];
     case SEARCH_BY_NAME:
@@ -33,20 +33,49 @@ export const mainReducer = (state = [], action) =>{
         return[...searchElementsByName];
     case SORT_BY_AZ:
         const sortAZ = (a, b) => {
-            if(a.name < b.name) { return -1;}
-            if(a.name > b.name) { return 1; }
+            if(a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
+            if(a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
             return 0;
         };
-        return state.slice().sort(sortAZ);
+        const sortRegistr = ( a, b) => {
+            if(a.name[0].toLowerCase() === b.name[0].toLowerCase()
+                && a.name[0].toLowerCase() !== a.name[0]
+                && b.name[0].toLowerCase() === b.name[0]
+            ){ return -1;}
+            if(a.name[0].toLowerCase() === b.name[0].toLowerCase()
+                && a.name[0].toLowerCase() === a.name[0]
+                && b.name[0].toLowerCase() !== b.name[0]
+            ){return 1;}
+            return 0;
+        };
+        return state.slice().sort(sortAZ).sort(sortRegistr);
     case SORT_BY_ZA:
-        const sortZA = (a, b) => {
-            if(a.name < b.name) { return 1;}
-            if(a.name > b.name) { return -1; }
+        const sortRegistr2 = ( a, b) => {
+            if(a.name[0].toLowerCase() === b.name[0].toLowerCase()
+                && a.name[0].toLowerCase() !== a.name[0]
+                && b.name[0].toLowerCase() === b.name[0]
+            ){ return -1;}
+            if(a.name[0].toLowerCase() === b.name[0].toLowerCase()
+                && a.name[0].toLowerCase() === a.name[0]
+                && b.name[0].toLowerCase() !== b.name[0]
+            ){return 1;}
             return 0;
         };
-        return state.slice().sort(sortZA);
+        const sortZA = (a, b) => {
+            if(a.name.toLowerCase() < b.name.toLowerCase()) { return 1; }
+            if(a.name.toLowerCase() > b.name.toLowerCase()) { return -1; }
+            return 0;
+        };
+        return state.slice().sort(sortZA).sort(sortRegistr2);
     default:
         return state;
     }
 };
 
+// if(a.name[0].toUpperCase() === a.name[0]
+//     && b.name[0].toUpperCase() !== b.name[0]
+//     && a.name[0].toLowerCase() === b.name[0].toLowerCase()){
+//     return 1;
+// }else{
+//     return -1;
+// }

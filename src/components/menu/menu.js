@@ -9,9 +9,6 @@ const Menu = () => (
         <ul className='menu-list'>
             <li><Link className='router-link' to={`/WL-Deploy/`}>All films</Link></li>
             <li><Link className='router-link' to={`/WL-Deploy/add`}>Add film</Link></li>
-            <li><Link className='router-link' to={`/WL-Deploy/pages/lorem`}>Lorem</Link></li>
-            <li><Link className='router-link' to={`/WL-Deploy/pages/ipsum`}>Ipsum</Link></li>
-            <li><Link className='router-link' to={`/WL-Deploy/pages/dolor`}>Dolor</Link></li>
         </ul>
     </div>
 );

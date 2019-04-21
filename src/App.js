@@ -30,6 +30,7 @@ const App = () => (
                         return <MockPage currentPage={current}/>;
                     }}/>
                 <Route path='/WL-Deploy/add' component={AddFilmForm}/>
+                <Route component={MainScreen}/>
             </Switch>
         </div>
     </Router>
